@@ -1,7 +1,7 @@
 '''
 Name- Shreyash Jeughale 
 Roll no.- 30
-Batch - B1
+Batch - B2
 Practical no.5 - Regular Expression
 '''
 
