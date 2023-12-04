@@ -5,12 +5,19 @@ Batch- B2
 Practical no.6 -Implement Dependency Parsing of textual input using spacy library.
 '''
 import spacy
+from spacy import displacy
+
 nlp = spacy.load("en_core_web_sm")
-piano_text = """The quick brown fox jumped over the lazy dog.
-                The dog that chased the cat is black
-                I saw the man that you saw on the street"""
-piano_doc = nlp(piano_text)
-for token in piano_doc:
+
+multiline_text = """
+Rain tapped gently on the window pane.
+Lost keys, frantic search, relieved smile.
+Cat curled up, purring softly.
+"""
+
+multiline_doc = nlp(multiline_text)
+
+for token in multiline_doc:
     print(
         f"""
 TOKEN: {token.text}
@@ -20,68 +27,64 @@ TOKEN: {token.text}
 {token.dep_ = }"""
     )
 
+displacy.serve(multiline_doc, style="dep")
+
 
 '''
-Output-
+******************    OUTPUT      *************************
+TOKEN: 
 
-TOKEN: The
 =====
-token.tag_ = 'DT'
-token.head.text = 'fox'
-token.dep_ = 'det'
+token.tag_ = '_SP'
+token.head.text = 'Rain'
+token.dep_ = 'dep'
 
-TOKEN: quick
+TOKEN: Rain
 =====
-token.tag_ = 'JJ'
-token.head.text = 'fox'
-token.dep_ = 'amod'
-
-TOKEN: brown
-=====
-token.tag_ = 'JJ'
-token.head.text = 'fox'
-token.dep_ = 'amod'
-
-TOKEN: fox
-=====
-token.tag_ = 'NN'
-token.head.text = 'jumped'
+token.tag_ = 'NNP'
+token.head.text = 'tapped'
 token.dep_ = 'nsubj'
 
-TOKEN: jumped
+TOKEN: tapped
 =====
 token.tag_ = 'VBD'
-token.head.text = 'jumped'
+token.head.text = 'tapped'
 token.dep_ = 'ROOT'
 
-TOKEN: over
+TOKEN: gently
+=====
+token.tag_ = 'RB'
+token.head.text = 'tapped'
+token.dep_ = 'advmod'
+
+TOKEN: on
 =====
 token.tag_ = 'IN'
-token.head.text = 'jumped'
+token.head.text = 'tapped'
 token.dep_ = 'prep'
 
 TOKEN: the
 =====
 token.tag_ = 'DT'
-token.head.text = 'dog'
+token.head.text = 'pane'
 token.dep_ = 'det'
 
-TOKEN: lazy
-=====
-token.tag_ = 'JJ'
-token.head.text = 'dog'
-token.dep_ = 'amod'
-
-TOKEN: dog
+TOKEN: window
 =====
 token.tag_ = 'NN'
-token.head.text = 'over'
+token.head.text = 'pane'
+token.dep_ = 'compound'
+
+TOKEN: pane
+=====
+token.tag_ = 'NN'
+token.head.text = 'on'
 token.dep_ = 'pobj'
 
 TOKEN: .
 =====
 token.tag_ = '.'
-token.head.text = 'jumped'
+token.head.text = 'tapped'
 token.dep_ = 'punct'
 
 TOKEN:
@@ -91,118 +94,114 @@ token.tag_ = '_SP'
 token.head.text = '.'
 token.dep_ = 'dep'
 
-TOKEN: The
+TOKEN: Lost
 =====
-token.tag_ = 'DT'
-token.head.text = 'dog'
-token.dep_ = 'det'
+token.tag_ = 'VBN'
+token.head.text = 'keys'
+token.dep_ = 'amod'
 
-TOKEN: dog
+TOKEN: keys
 =====
-token.tag_ = 'NN'
-token.head.text = 'is'
-token.dep_ = 'nsubj'
+token.tag_ = 'NNS'
+token.head.text = 'keys'
+token.dep_ = 'ROOT'
 
-TOKEN: that
+TOKEN: ,
 =====
-token.tag_ = 'WDT'
-token.head.text = 'chased'
-token.dep_ = 'nsubj'
+token.tag_ = ','
+token.head.text = 'keys'
+token.dep_ = 'punct'
 
-TOKEN: chased
-=====
-token.tag_ = 'VBD'
-token.head.text = 'dog'
-token.dep_ = 'relcl'
-
-TOKEN: the
-=====
-token.tag_ = 'DT'
-token.head.text = 'cat'
-token.dep_ = 'det'
-
-TOKEN: cat
-=====
-token.tag_ = 'NN'
-token.head.text = 'chased'
-token.dep_ = 'dobj'
-
-TOKEN: is
-=====
-token.tag_ = 'VBZ'
-token.head.text = 'saw'
-token.dep_ = 'ccomp'
-
-TOKEN: black
+TOKEN: frantic
 =====
 token.tag_ = 'JJ'
-token.head.text = 'is'
-token.dep_ = 'acomp'
+token.head.text = 'search'
+token.dep_ = 'amod'
+
+TOKEN: search
+=====
+token.tag_ = 'NN'
+token.head.text = 'smile'
+token.dep_ = 'nmod'
+
+TOKEN: ,
+=====
+token.tag_ = ','
+token.head.text = 'search'
+token.dep_ = 'punct'
+
+TOKEN: relieved
+=====
+token.tag_ = 'JJ'
+token.head.text = 'smile'
+token.dep_ = 'amod'
+
+TOKEN: smile
+=====
+token.tag_ = 'NN'
+token.head.text = 'keys'
+token.dep_ = 'conj'
+
+TOKEN: .
+=====
+token.tag_ = '.'
+token.head.text = 'smile'
+token.dep_ = 'punct'
 
 TOKEN:
 
 =====
 token.tag_ = '_SP'
-token.head.text = 'black'
+token.head.text = '.'
 token.dep_ = 'dep'
 
-TOKEN: I
+TOKEN: Cat
 =====
-token.tag_ = 'PRP'
-token.head.text = 'saw'
+token.tag_ = 'NNP'
+token.head.text = 'curled'
 token.dep_ = 'nsubj'
 
-TOKEN: saw
+TOKEN: curled
 =====
 token.tag_ = 'VBD'
-token.head.text = 'saw'
+token.head.text = 'curled'
 token.dep_ = 'ROOT'
 
-TOKEN: the
+TOKEN: up
 =====
-token.tag_ = 'DT'
-token.head.text = 'man'
-token.dep_ = 'det'
+token.tag_ = 'RP'
+token.head.text = 'curled'
+token.dep_ = 'prt'
 
-TOKEN: man
+TOKEN: ,
 =====
-token.tag_ = 'NN'
-token.head.text = 'saw'
-token.dep_ = 'dobj'
+token.tag_ = ','
+token.head.text = 'curled'
+token.dep_ = 'punct'
 
-TOKEN: that
+TOKEN: purring
 =====
-token.tag_ = 'WDT'
-token.head.text = 'saw'
-token.dep_ = 'dobj'
+token.tag_ = 'VBG'
+token.head.text = 'curled'
+token.dep_ = 'advcl'
 
-TOKEN: you
+TOKEN: softly
 =====
-token.tag_ = 'PRP'
-token.head.text = 'saw'
-token.dep_ = 'nsubj'
+token.tag_ = 'RB'
+token.head.text = 'purring'
+token.dep_ = 'advmod'
 
-TOKEN: saw
+TOKEN: .
 =====
-token.tag_ = 'VBD'
-token.head.text = 'man'
-token.dep_ = 'relcl'
+token.tag_ = '.'
+token.head.text = 'curled'
+token.dep_ = 'punct'
 
-TOKEN: on
-=====
-token.tag_ = 'IN'
-token.head.text = 'saw'
-token.dep_ = 'prep'
+TOKEN:
 
-TOKEN: the
 =====
-token.tag_ = 'DT'
-token.head.text = 'street'
-token.dep_ = 'det'
+token.tag_ = '_SP'
+token.head.text = '.'
+token.dep_ = 'dep'
 
-TOKEN: street
-=====
-token.tag_ = 'NN'
-token.head.text = 'on'
-token.dep_ = 'pobj'
 '''
